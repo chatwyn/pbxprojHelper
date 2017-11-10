@@ -138,7 +138,7 @@ class PropertyListHandler: NSObject {
         for (command, arguments) in json {
             // 遍历每个命令中的路径
             for (keyPath, data) in arguments {
-                let keys = keyPath.components(separatedBy: ".")
+                let keys = keyPath.components(separatedBy: "cwb")
                 
                 /// 假如 command 为 "modify" keyPath 为 "A.B.C"，目的是让 value[A][B][C] = data。需要沿着路径深入，使用闭包修改叶子节点的数据，递归过程中逐级向上返回修改后的结果，完成整个路径上数据的更新。
                 ///
@@ -267,7 +267,7 @@ class PropertyListHandler: NSObject {
                     }
                 }
                 for key in set1.intersection(set2) {
-                    let keyPath = parentKeyPath == "" ? key : "\(parentKeyPath).\(key)"
+                    let keyPath = parentKeyPath == "" ? key : "\(parentKeyPath)cwb\(key)"
                     // values are both String, leaf node
                     if let str1 = dictionary1[key] as? String,
                         let str2 = dictionary2[key] as? String {
